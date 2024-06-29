@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <th:block th:replace="layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="layout :: header"></th:block>
+<div class="container">
+    <!-- Viết code ở đây-->
+    <div class="banner"></div>
+    <div class="container-tong">
+
+        <div class="ui-input-container">
+            <input
+                    class="ui-input"
+                    placeholder="Tìm kiếm..."
+                    required=""
+                    type="text"
+            />
+            <div class="ui-input-underline"></div>
+            <div class="ui-input-highlight"></div>
+            <div class="ui-input-icon">
+                <svg fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                            d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                    ></path>
+                </svg>
+            </div>
+        </div>
+        <div class="ui-input-container" style="margin-left: 0;">
+            <input
+                    class="ui-input"
+                    id="search-input"
+                    placeholder="Địa điểm..."
+                    readonly
+                    required=""
+                    type="text"
+            />
+            <div class="ui-input-underline"></div>
+            <div class="ui-input-highlight"></div>
+            <div class="ui-input-icon" onclick="toggleDropdown()">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                </svg>
+            </div>
+            <div class="dropdown-content" id="dropdown-content">
+                <a href="#" onclick="selectOption('Option 1')">Option 1</a>
+                <a href="#" onclick="selectOption('Option 2')">Option 2</a>
+                <a href="#" onclick="selectOption('Option 3')">Option 3</a>
+            </div>
+        </div>
+        <button> Tìm</button>
+
+        <div>
+            Bai post hien thi o day
+        </div>
+    </div>
+    <h1>TOP CÔNG TY HÀNG ĐẦU</h1>
+    <a class="Btn prev" onclick="plusSlides(-1)">
+        <svg class="arrow" height="1.2em" viewBox="0 0 512 512">
+            <path d="M105.4 278.6c-12.5-12.5-12.5-32.8 0-45.3l192-192c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3L173.3 256l169.4 169.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0l-192-192z"></path>
+        </svg>
+        <p class="text">Previous</p>
+    </a>
+    <a class="Btn next" onclick="plusSlides(1)">
+        <svg class="arrow" height="1.2em" viewBox="0 0 512 512">
+            <path d="M406.6 233.4c12.5-12.5 12.5-32.8 0-45.3l-192-192c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.7 256 169.4 425.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l192-192z"></path>
+        </svg>
+        <p class="text">Next</p>
+    </a>
+    <div class="slideshow-container">
+        <div class="mySlides fade">
+            <div class="frame-container">
+                <div class="frame"></div>
+                <div class="frame"></div>
+                <div class="frame"></div>
+                <div class="frame"></div>
+
+            </div>
+        </div>
+        <div class="mySlides fade">
+            <div class="frame-container">
+                <div class="frame"></div>
+                <div class="frame"></div>
+                <div class="frame"></div>
+                <div class="frame"></div>
+
+            </div>
+        </div>
+        <div class="mySlides fade">
+            <div class="frame-container">
+                <div class="frame"></div>
+                <div class="frame"></div>
+                <div class="frame"></div>
+                <div class="frame"></div>
+
+            </div>
+        </div>
+        <!-- Next and previous buttons -->
+
+    </div>
+
+    <div class="tag-body" style="margin: 10px 0; text-align: center;">
+        <div id="tag-cloud-container" class="tag-cloud-container"></div>
+    </div>
+    <!-- =========================-->
+</div>
+<th:block th:replace="layout :: footer"></th:block>
+</body>
+</html>

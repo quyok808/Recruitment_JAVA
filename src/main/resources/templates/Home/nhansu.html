@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>OnlyA Recruitment Website</title>
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="/images/Logo_Web.png" rel="icon" type="image/x-icon"/>
+</head>
+<body>
+<nav class="navbar">
+    <div class="menu-icon" onclick="toggleVerticalMenu()">&#9776;</div>
+    <ul class="horizontal-menu">
+        <li>
+            <a href="/"><img alt="LOGO ICON" class="LOGO_IMG" src="/images/logoHome.png"></a>
+        </li>
+        <li>
+            <a href="/">HOME</a>
+        </li>
+        <li>
+            <a href="#about">NGANH NGHE</a>
+        </li>
+        <li>
+            <a href="#services">CÔNG TY</a>
+            <!--            <ul class="submenu">-->
+            <!--                <li><a href="#vieclam1">Danh sách công ty</a></li>-->
+            <!--                <li><a href="#vieclam2">Top công ty</a></li>-->
+
+            <!--            </ul>-->
+        </li>
+    </ul>
+    <ul style="margin-left: auto;display:flex;">
+        <a href="/tuyendung" style="text-decoration: none;">
+            <ul class="tuyendung-button">
+                <button class="Btn-CPost">
+
+                    <div class="sign-CPost">+</div>
+
+                    <div class="text-CPost">Đăng bài ngay !!!</div>
+                </button>
+            </ul>
+        </a>
+        <a th:href="@{/login}" style="text-decoration: none;">
+            <ul class="login-button">
+                <button class="animated-button1">
+                    <svg class="arr-21" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                    </svg>
+                    <span class="text1">A C C O U N T</span>
+                    <span class="circle1"></span>
+                    <svg class="arr-11" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                    </svg>
+                </button>
+            </ul>
+        </a>
+
+    </ul>
+</nav>
+<nav class="vertical-menu" id="verticalMenu">
+    <ul>
+        <li><a href="#home">HOME</a></li>
+        <li><a href="#about">NGANH NGHE</a></li>
+        <li><a href="#services">CÔNG TY</a></li>
+    </ul>
+</nav>
+<div class="banner"></div>
+<div class="container-tong">
+
+    <div class="ui-input-container">
+        <input
+                class="ui-input"
+                placeholder="Tìm kiếm..."
+                required=""
+                type="text"
+        />
+        <div class="ui-input-underline"></div>
+        <div class="ui-input-highlight"></div>
+        <div class="ui-input-icon">
+            <svg fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                        d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                ></path>
+            </svg>
+        </div>
+    </div>
+    <div class="ui-input-container" style="margin-left: 0;">
+        <input
+                class="ui-input"
+                id="search-input"
+                placeholder="Địa điểm..."
+                readonly
+                required=""
+                type="text"
+        />
+        <div class="ui-input-underline"></div>
+        <div class="ui-input-highlight"></div>
+        <div class="ui-input-icon" onclick="toggleDropdown()">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+            </svg>
+        </div>
+        <div class="dropdown-content" id="dropdown-content">
+            <a href="#" onclick="selectOption('Option 1')">Option 1</a>
+            <a href="#" onclick="selectOption('Option 2')">Option 2</a>
+            <a href="#" onclick="selectOption('Option 3')">Option 3</a>
+        </div>
+    </div>
+    <button> Tìm</button>
+
+    <div>
+
+    </div>
+</div>
+<h1>TOP CÔNG TY HÀNG ĐẦU</h1>
+<a class="Btn prev" onclick="plusSlides(-1)">
+    <svg class="arrow" height="1.2em" viewBox="0 0 512 512">
+        <path d="M105.4 278.6c-12.5-12.5-12.5-32.8 0-45.3l192-192c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3L173.3 256l169.4 169.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0l-192-192z"></path>
+    </svg>
+    <p class="text">Previous</p>
+</a>
+<a class="Btn next" onclick="plusSlides(1)">
+    <svg class="arrow" height="1.2em" viewBox="0 0 512 512">
+        <path d="M406.6 233.4c12.5-12.5 12.5-32.8 0-45.3l-192-192c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.7 256 169.4 425.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l192-192z"></path>
+    </svg>
+    <p class="text">Next</p>
+</a>
+<div class="slideshow-container">
+    <div class="mySlides fade">
+        <div class="frame-container">
+            <div class="frame"></div>
+            <div class="frame"></div>
+            <div class="frame"></div>
+            <div class="frame"></div>
+
+        </div>
+    </div>
+    <div class="mySlides fade">
+        <div class="frame-container">
+            <div class="frame"></div>
+            <div class="frame"></div>
+            <div class="frame"></div>
+            <div class="frame"></div>
+
+        </div>
+    </div>
+    <div class="mySlides fade">
+        <div class="frame-container">
+            <div class="frame"></div>
+            <div class="frame"></div>
+            <div class="frame"></div>
+            <div class="frame"></div>
+
+        </div>
+    </div>
+    <!-- Next and previous buttons -->
+
+</div>
+
+<div class="tag-body" style="margin: 10px 0; text-align: center;">
+    <div id="tag-cloud-container" class="tag-cloud-container"></div>
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3>About Us</h3>
+            <p>We are dedicated to connecting the best talent with the best companies. Join us to find your dream job or
+                the perfect candidate.</p>
+        </div>
+        <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Jobs</a></li>
+                <li><a href="#">Companies</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h3>Contact Us</h3>
+            <p>Email: support@OnlyA.com</p>
+            <p>Phone: 0358361511</p>
+            <p>Address: 10/80C Xa lộ Hà Nội, phường Hiệp Phú, quận 9, TP. Thủ Đức, TP.HCM</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 OnlyA Recruitment Website. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    function toggleVerticalMenu() {
+        const verticalMenu = document.getElementById('verticalMenu');
+        verticalMenu.classList.toggle('active');
+        if (verticalMenu.classList.contains('active')) {
+            document.addEventListener('click', hideMenuOnClickOutside);
+        } else {
+            document.removeEventListener('click', hideMenuOnClickOutside);
+        }
+    }
+    function hideMenuOnClickOutside(event) {
+        const menuIcon = document.querySelector('.menu-icon');
+        const verticalMenu = document.getElementById('verticalMenu');
+        if (!verticalMenu.contains(event.target) && !menuIcon.contains(event.target)) {
+            verticalMenu.classList.remove('active');
+            document.removeEventListener('click', hideMenuOnClickOutside);
+        }
+    }
+    function toggleDropdown() {
+        var dropdown = document.getElementById('dropdown-content');
+        if (dropdown.style.display === 'block') {
+            dropdown.style.display = 'none';
+        } else {
+            dropdown.style.display = 'block';
+        }
+    }
+
+    function selectOption(option) {
+        document.getElementById('search-input').value = option;
+        document.getElementById('dropdown-content').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        if (!event.target.closest('.ui-input-icon')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.style.display === 'block') {
+                    openDropdown.style.display = 'none';
+                }
+            }
+        }
+    }
+</script>
+<script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " active";
+    }
+</script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="TAGCLOUD/tagcloud.js" type="module"></script>
+<script src="TAGCLOUD/script-tag.js" type="module"></script>
+</body>
+</html>

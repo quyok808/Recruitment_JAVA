@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>OnlyA Recruitment Website</title>
+    <link href="/css/styles.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="/images/Logo_Web.png" rel="icon" type="image/x-icon"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <div class="menu-icon" onclick="toggleVerticalMenu()">&#9776;</div>
+    <ul class="horizontal-menu">
+        <li>
+            <a href="/"><img alt="LOGO ICON" class="LOGO_IMG" src="/images/logoHome.png"></a>
+        </li>
+        <li>
+            <a href="/tuyendung/company-info">Thông tin công ty</a>
+        </li>
+        <li>
+            <a href="/tuyendung">Quản lý công việc</a>
+            <ul class="submenu">
+                <li><a href="/addJobPost">Đăng tin tuyển dụng</a></li>
+                <li><a href="/application">Danh sách ứng viên</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <ul style="margin-left: auto;display:flex;">
+        <a th:href="@{/account}" style="text-decoration: none;">
+            <ul class="login-button">
+                <button class="animated-button1">
+                    <svg class="arr-21" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                    </svg>
+                    <span class="text1">A C C O U N T</span>
+                    <span class="circle1"></span>
+                    <svg class="arr-11" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                    </svg>
+                </button>
+            </ul>
+        </a>
+
+    </ul>
+</nav>
+<nav class="vertical-menu" id="verticalMenu">
+    <ul>
+        <li><a href="#home">VIỆC LÀM</a></li>
+        <li><a href="#about">HỒ SƠ & CV</a></li>
+        <li><a href="#services">CÔNG TY</a></li>
+        <!-- <li><a href="#contact">CÔNG CỤ</a>  -->
+        <li><a href="#contact">CẨM NANG NGHỀ NGHIỆP</a>
+    </ul>
+</nav>
+
+<div>
+    <h4>Job Posting</h4>
+    <hr>
+    <dl class="row">
+        <dt class="col-sm-2">Title</dt>
+        <dd class="col-sm-10" th:text="${jobPost.jobTitle}"></dd>
+        <dt class="col-sm-2">Description</dt>
+        <dd class="col-sm-10" th:text="${jobPost.jobDescription}"></dd>
+        <dt class="col-sm-2">Location</dt>
+        <dd class="col-sm-10" th:text="${jobPost.location}"></dd>
+        <dt class="col-sm-2">Date Posted</dt>
+        <dd class="col-sm-10" th:text="${jobPost.datePosted}"></dd>
+        <dt class="col-sm-2">Total Applications</dt>
+        <dd class="col-sm-10" th:text="${jobPost.totalApplications}"></dd>
+    </dl>
+</div>
+<div>
+    <a th:href="@{/edit/{id}(id=${jobPost.jobID})}">Edit</a>
+    <a th:href="@{/tuyendung}">Back to list</a>
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3>About Us</h3>
+            <p>We are dedicated to connecting the best talent with the best companies. Join us to find your dream job or
+                the perfect candidate.</p>
+        </div>
+        <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Jobs</a></li>
+                <li><a href="#">Companies</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h3>Contact Us</h3>
+            <p>Email: support@OnlyA.com</p>
+            <p>Phone: 0358361511</p>
+            <p>Address: 10/80C Xa lộ Hà Nội, phường Hiệp Phú, quận 9, TP. Thủ Đức, TP.HCM</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 OnlyA Recruitment Website. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    function toggleVerticalMenu() {
+        const verticalMenu = document.getElementById('verticalMenu');
+        verticalMenu.classList.toggle('active');
+        if (verticalMenu.classList.contains('active')) {
+            document.addEventListener('click', hideMenuOnClickOutside);
+        } else {
+            document.removeEventListener('click', hideMenuOnClickOutside);
+        }
+    }
+    function hideMenuOnClickOutside(event) {
+        const menuIcon = document.querySelector('.menu-icon');
+        const verticalMenu = document.getElementById('verticalMenu');
+        if (!verticalMenu.contains(event.target) && !menuIcon.contains(event.target)) {
+            verticalMenu.classList.remove('active');
+            document.removeEventListener('click', hideMenuOnClickOutside);
+        }
+    }
+    function toggleDropdown() {
+        var dropdown = document.getElementById('dropdown-content');
+        if (dropdown.style.display === 'block') {
+            dropdown.style.display = 'none';
+        } else {
+            dropdown.style.display = 'block';
+        }
+    }
+
+    function selectOption(option) {
+        document.getElementById('search-input').value = option;
+        document.getElementById('dropdown-content').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        if (!event.target.closest('.ui-input-icon')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.style.display === 'block') {
+                    openDropdown.style.display = 'none';
+                }
+            }
+        }
+    }
+</script>
+<script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " active";
+    }
+</script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+</html>
