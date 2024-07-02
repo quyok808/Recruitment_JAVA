@@ -1,7 +1,6 @@
 Viettel Group
 VinGroup
 FPT Corporation
-Vingroup
 BIDV
 Vietcombank
 Techcombank
@@ -16,7 +15,7 @@ Sacombank
 HDBank
 VietJet Air
 Bamboo Airways
-PetroVietnam 
+PetroVietnam
 VinaPhone
 VinFast
 TH True Milk

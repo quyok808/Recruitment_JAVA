@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <th:block th:include="Layout :: logo-and-css"></th:block>
+</head>
+<body>
+<th:block th:replace="Layout :: header"></th:block>
+<div class="container">
+    <!-- Viết code ở đây-->
+    <!-- =========================-->
+    <h1 class="mb-4">Add Job Position</h1>
+    <form th:action="@{/job-positions/add}" th:object="${jobPosition}" method="post">
+        <div class="mb-3">
+            <label for="title" class="form-label">Job Position Title:</label>
+            <input type="text" id="title" th:field="*{title}" class="form-control"/>
+            <div class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Job Position Description:</label>
+            <textarea id="description" th:field="*{description}" class="form-control"></textarea>
+            <div class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <!-- =========================-->
+</div>
+<th:block th:replace="Layout :: footer"></th:block>
+</body>
+</html>

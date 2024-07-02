@@ -28,9 +28,10 @@ public class JobPosting {
     private String location;
     private LocalDate datePosted;
     private String Kinhnghiem;
+    private int trangthai = 0;
     @ManyToOne
-    @JoinColumn(name = "CareersID")
-    private Careers careers;
+    @JoinColumn(name = "JobpositionID")
+    private JobPosition jobposition;
     private String ChucVu;
     private String HinhThucLamViec;
     private long MucLuong;

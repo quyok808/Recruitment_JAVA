@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>OnlyA Recruitment Website</title>
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="/images/Logo_Web.png" rel="icon" type="image/x-icon"/>
-    <link th:fragment="link-css" rel="stylesheet" th:href="@{/css/styles.css}">
+    <th:block th:fragment="logo-and-css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+        <link th:href="@{/css/styles.css}" rel="stylesheet">
+        <link th:href="@{/images/Logo_Web.png}" rel="icon" type="image/x-icon"/>
+    </th:block>
 </head>
 <body>
 <header th:fragment="header">
@@ -18,48 +20,57 @@
                 <a href="/"><img alt="LOGO ICON" class="LOGO_IMG" src="/images/logoHome.png"></a>
             </li>
             <li>
-                <a href="/">HOME</a>
+                <a href="/">TRANG CHỦ</a>
             </li>
             <li>
-                <a href="#about">NGANH NGHE</a>
+                <a href="/job-positions">NGÀNH NGHỀ</a>
             </li>
             <li>
-                <a href="#services">CÔNG TY</a>
+                <a href="/companies">CÔNG TY</a>
             </li>
         </ul>
         <ul style="margin-left: auto;display:flex;">
-            <a href="/tuyendung" style="text-decoration: none;">
+
+            <a sec:authorize="hasAuthority('BUSINESS') or hasAuthority('ADMIN')" href="/tuyendung"
+               style="text-decoration: none;">
                 <ul class="tuyendung-button">
                     <button class="Btn-CPost">
-
                         <div class="sign-CPost">+</div>
-
                         <div class="text-CPost">Đăng bài ngay !!!</div>
                     </button>
                 </ul>
             </a>
-            <a th:href="@{/login}" style="text-decoration: none;">
-                <ul class="login-button">
+            <span sec:authorize="isAuthenticated()">Xin chào, <span
+                    sec:authentication="name"></span></span>
+            <div class="dropdown">
+                <a th:href="@{${#authentication.principal == null} ? '/login' : '/login'}"
+                   style="text-decoration: none;" onmouseout="hideDropdownOnMouseOut()">
+
                     <button class="animated-button1">
                         <svg class="arr-21" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
                         </svg>
-                        <span class="text1">A C C O U N T</span>
+                        <span class="text1" sec:authorize="isAuthenticated()">L O G O U T</span>
+                        <span class="text1" sec:authorize="!isAuthenticated()">L O G I N</span>
                         <span class="circle1"></span>
                         <svg class="arr-11" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
                         </svg>
                     </button>
-                </ul>
-            </a>
-
+                </a>
+                <div class="dropdown-content" sec:authorize="isAuthenticated()">
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit">Logout</button>
+                    </form>
+                </div>
+            </div>
         </ul>
     </nav>
     <nav class="vertical-menu" id="verticalMenu">
         <ul>
-            <li><a href="#home">HOME</a></li>
-            <li><a href="#about">NGANH NGHE</a></li>
-            <li><a href="#services">CÔNG TY</a></li>
+            <li><a href="#home">TRANG CHỦ</a></li>
+            <li><a href="#about">NGÀNH NGHỀ</a></li>
+            <li><a href="/companies">CÔNG TY</a></li>
         </ul>
     </nav>
 </header>
@@ -72,26 +83,28 @@
         <div class="footer-container">
             <div class="footer-column">
                 <h3>About Us</h3>
-                <p>We are dedicated to connecting the best talent with the best companies. Join us to find your dream
-                    job or
-                    the perfect candidate.</p>
+                <p>
+                    ONLYA là công ty tuyển dụng chuyên nghiệp, cung cấp giải pháp nhân sự toàn diện cho doanh nghiệp.
+                    Với đội ngũ giàu kinh nghiệm và mạng lưới ứng viên phong phú, chúng tôi cam kết mang đến ứng viên
+                    phù hợp nhất, tối ưu hóa quá trình tuyển dụng và phát triển nhân lực. ONLYA luôn đặt chất lượng dịch
+                    vụ và sự hài lòng của khách hàng lên hàng đầu.
+                </p>
             </div>
             <div class="footer-column">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Jobs</a></li>
-                    <li><a href="#">Companies</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="/">TRANG CHỦ</a></li>
+                    <li><a href="#">NGÀNH NGHỀ</a></li>
+                    <li><a href="#">CÔNG TY</a></li>
                 </ul>
             </div>
             <div class="footer-column">
                 <h3>Follow Us</h3>
                 <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="https://facebook.com"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div class="footer-column">
@@ -181,6 +194,7 @@
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script th:src="@{TAGCLOUD/tagcloud.js}" type="module"></script>
     <script th:src="@{TAGCLOUD/script-tag.js}" type="module"></script>
+    <script th:src="@{/js/scripts.js}" type="module"></script>
 </footer>
 </body>
 </html>

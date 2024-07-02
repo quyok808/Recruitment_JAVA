@@ -14,22 +14,22 @@
         <button class="signinBtn">Sign in</button>
     </div>
     <div class="box signup">
-        <h2>Do have an account?</h2>
+        <h2>Don't Have an Account?</h2>
         <button class="signupBtn">Sign up</button>
     </div>
     <div class="formBx">
         <div class="form signinform">
-            <form id="signInForm" action="/login" method="POST">
+            <form id="signInForm" th:action="@{/login}" method="post">
                 <h3>Sign In</h3>
                 <div class="inputGroup">
-                    <input type="text" id="username" name="username" required autocomplete="off">
+                    <input type="text" id="username" name="username" th:value="${user.username}" required autocomplete="off" >
                     <label for="username">Username</label>
                 </div>
                 <div class="inputGroup">
-                    <input id="password" type="password" name="password" required autocomplete="off">
+                    <input id="password" type="password" name="password" th:value="${user.password}" required autocomplete="off" >
                     <label for="password">Password</label>
                 </div>
-                <input type="submit" value="Login">
+                <input type="submit" value="login">
                 <a href="#" class="forgot">Forgot Password</a>
 
                 <button class="button1" onclick="showGoogleLogin()">
@@ -41,18 +41,23 @@
                     </svg>
                     Continue with Google
                 </button>
+                <p th:if="${error}" th:text="${error}" style="color: red;"></p>
             </form>
         </div>
-        <div class="form signupform">
-            <form action="/register" method="POST">
+        <div class="form signupform" >
+            <form th:action="@{/register}" method="post">
                 <h3>Sign Up</h3>
                 <div class="inputGroup">
-                    <input type="text" name="username" required autocomplete="off">
+                    <input type="text" name="username"  required autocomplete="off">
                     <label for="username">Username</label>
                 </div>
                 <div class="inputGroup">
                     <input id="email" type="email" name="email" required autocomplete="off">
                     <label for="email">Email Address</label>
+                </div>
+                <div class="inputGroup">
+                    <input type="tel" id="phone" name="phone" required autocomplete="off">
+                    <label for="phone">Phone Number</label>
                 </div>
                 <div class="inputGroup">
                     <input type="password" name="password" required autocomplete="off">
@@ -69,7 +74,7 @@
                     <label for="business"></label>
                     <input type="radio" name="accountType" value="business" id="business" required> Business
                 </div>
-                <input type="submit" value="Register">
+                <input type="submit" value="register">
             </form>
         </div>
     </div>

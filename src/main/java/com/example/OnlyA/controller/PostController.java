@@ -7,13 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.logging.Logger;
+
+
+//them controller TuyenDungPage 1/7/2024 (PostManagement)
 
 @Controller
 public class PostController {
@@ -92,7 +97,7 @@ public class PostController {
             model.addAttribute("jobPost", temp);
             return "Post/Detail";
         } else {
-            return "Làm gì có sách này mà đọc";
+            return "Khong co bai viet nay !!!";
         }
     }
 }

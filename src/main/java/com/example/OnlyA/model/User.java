@@ -46,6 +46,7 @@ public class User implements UserDetails {
     private String phone;
     @NotEmpty(message = "Account type is required")
     private String accountType;
+    private int hasCompany = 0;
     private String Name;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",

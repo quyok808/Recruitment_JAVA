@@ -17,7 +17,8 @@ class TagCloud {
         this.container.innerHTML = '';
         this.texts.forEach((text, index) => {
             const link = document.createElement('a');
-            link.href = `#${text.toLowerCase()}`;  // Change this to actual URLs if needed
+            link.href = `/${text.toLowerCase().replace(/\s+/g, '-')}`;  // Change this to actual URLs if needed
+            link.target = "_blank";
             link.textContent = text;
             this.container.appendChild(link);
             const phi = Math.acos(-1 + (2 * (index + 1) - 1) / this.texts.length);
