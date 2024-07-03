@@ -21,6 +21,6 @@ public class Recruiter {
 
     @ManyToOne
     @JoinColumn(name = "CompanyID")
-    private Companies companies;
+    private Company company;
     // Getters and setters
 }

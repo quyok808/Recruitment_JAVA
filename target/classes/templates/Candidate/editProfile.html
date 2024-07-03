@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chỉnh sửa hồ sơ &amp; CV</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        /* CSS for the form */
+        main {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 600px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        form div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        input[type="file"] {
+            margin-top: 5px;
+        }
+
+        p {
+            font-size: 14px;
+            margin-top: 5px;
+            color: #666;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<th:block th:replace="Layout :: header"></th:block>
+<main>
+    <form th:action="@{/candidate/update}" th:object="${candidate}" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label for="fullName">Họ và tên:</label>
+            <input type="text" id="fullName" th:field="*{fullName}" required>
+        </div>
+        <div>
+            <label for="experience">Kinh nghiệm:</label>
+            <textarea id="experience" th:field="*{experience}" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="jobPosition">Chuyên ngành</label>
+            <select id="jobPosition" class="form-control" th:field="*{jobposition.id}">
+                <option value="">-- Chọn chuyên ngành --</option>
+                <option th:each="jobPosition : ${jobpositions}"
+                        th:value="${jobPosition.id}"
+                        th:text="${jobPosition.title}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="skills">Kỹ năng:</label>
+            <textarea id="skills" th:field="*{skills}" required></textarea>
+        </div>
+        <div>
+            <label for="cvFile">CV:</label>
+            <input type="file" id="cvFile" name="cvFile" accept=".pdf,.png,.jpg,.jpeg">
+            <p th:if="${candidate.cvFileName != null}" th:text="${'Tệp hiện tại: ' + candidate.cvFileName}"></p>
+        </div>
+        <div>
+            <label for="certificateFile">Chứng chỉ:</label>
+            <input type="file" id="certificateFile" name="certificateFile" accept=".pdf,.png,.jpg,.jpeg">
+            <p th:if="${candidate.certificateFileName != null}"
+               th:text="${'Tệp hiện tại: ' + candidate.certificateFileName}"></p>
+        </div>
+        <div>
+            <label for="awardFile">Giải thưởng:</label>
+            <input type="file" id="awardFile" name="awardFile" accept=".pdf,.png,.jpg,.jpeg">
+            <p th:if="${candidate.awardFileName != null}" th:text="${'Tệp hiện tại: ' + candidate.awardFileName}"></p>
+        </div>
+        <button type="submit">Cập nhật</button>
+    </form>
+</main>
+<footer th:replace="Layout :: footer"></footer>
+</body>
+</html>

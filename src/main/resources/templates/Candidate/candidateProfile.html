@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hồ Sơ &amp; CV</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        /* General reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        /* Container for main content */
+        main {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 600px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* Profile information section */
+        .profile-info {
+            margin-bottom: 20px;
+        }
+
+        .profile-info div {
+            position: relative;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .profile-info label {
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background-color: #fff;
+            padding: 0 5px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .profile-info p {
+            margin: 0;
+            line-height: 1.4;
+            background-color: #f2f2f2; /* Gray background for content */
+            padding: 8px; /* Padding for content */
+            border-radius: 4px; /* Rounded corners for content */
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .edit-button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .edit-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<header th:replace="Layout :: header"></header>
+<main>
+    <section class="profile-info">
+        <div>
+            <label for="fullName">Họ và tên:</label>
+            <p id="fullName" th:text="${candidate.fullName}">Tên ứng viên</p>
+        </div>
+        <div>
+            <label for="experience">Kinh nghiệm:</label>
+            <p id="experience" th:text="${candidate.experience}">Kinh nghiệm ứng viên</p>
+        </div>
+        <div>
+            <label for="major">Chuyên ngành:</label>
+            <p id="major" th:text="${candidate.jobposition.title}">Chuyên ngành ứng viên</p>
+        </div>
+        <div>
+            <label for="skills">Kỹ năng:</label>
+            <p id="skills" th:text="${candidate.skills}">Kỹ năng ứng viên</p>
+        </div>
+        <div th:if="${candidate.cvFileName != null}">
+            <label for="cv">CV:</label>
+            <img id="cv" th:src="@{'/uploads/' + ${candidate.cvFileName}}" alt="CV của ứng viên">
+        </div>
+        <div th:if="${candidate.certificateFileName != null}">
+            <label for="certificate">Chứng chỉ:</label>
+            <img id="certificate" th:src="@{'/uploads/' + ${candidate.certificateFileName}}"
+                 alt="Chứng chỉ của ứng viên">
+        </div>
+        <div th:if="${candidate.awardFileName != null}">
+            <label for="award">Giải thưởng:</label>
+            <img id="award" th:src="@{'/uploads/' + ${candidate.awardFileName}}" alt="Giải thưởng của ứng viên">
+        </div>
+        <a class="edit-button" th:href="@{/candidate/edit}">Chỉnh sửa hồ sơ</a>
+    </section>
+</main>
+<footer th:replace="Layout :: footer"></footer>
+</body>
+</html>

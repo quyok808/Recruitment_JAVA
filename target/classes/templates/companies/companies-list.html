@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <th:block th:include="Layout :: logo-and-css"></th:block>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .banner {
+             background: linear-gradient(90deg, #3950eb, #9c27b0);
+            text-align: center;
+            justify-content: center;
+            height: 400px;
+        }
+        .card {
+            border: none; /* Bỏ viền khung */
+            transition: box-shadow 0.3s ease; /* Hiệu ứng chuyển đổi cho box-shadow */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hiệu ứng nổi lên khi hover */
+        }
+        .card-body{
+            height: 450px;
+
+        }
+        .card-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 100px;
+        }
+        .card-title{
+            margin-top:10px;
+        }
+
+        .anhbia{
+            height:200px;
+            width:100%;
+        }
+
+        .logo{
+            max-height: 100px;
+            z-index:1000;
+            margin-top:-50px;
+            border: 1px solid #c3b9b9;
+            margin-left:10px;
+        }
+        h1{
+            text-align:center;
+            font-size: 36px;
+            font-weight:600;
+            margin-top: 10px;
+            margin-bottom :20px;
+        }
+        .card-title:hover{
+            text-decoration: underline; /* Gạch chân khi hover */
+        }
+    </style>
+    <style>
+        .container-tong {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 16px;
+            background-color: #ffffff;
+            margin-left: 50px;
+            margin-top:20px;
+        }
+        .card-body {
+            padding: 16px;
+        }
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+        .card-text {
+            font-size: 1rem;
+        }
+        .card-img {
+            width: 150px; /* Make the image square */
+            height: 150px; /* Make the image square */
+            object-fit: cover; /* Ensure the image covers the area */
+            margin-right: 16px;
+            border-radius: 4px; /* Optional: Add some rounding to the image corners */
+        }
+    </style>
+</head>
+<body>
+<th:block th:replace="Layout :: header"></th:block>
+<div class="container">
+    <!-- Viết code ở đây-->
+    <!-- =========================-->
+    <div>
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/companies/add}"
+           class="btn btn-primary mb-3">Thêm công ty mới</a>
+    </div>
+    <h1>DANH SÁCH CÔNG TY NỔI BẬT</h1>
+    <div class="container-fluid">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <!-- Sử dụng row-cols-md-3 để chỉ định mỗi hàng có tối đa 3 cột trên màn hình lớn -->
+            <div th:each="company : ${companies}">
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div sec:authorize="!isAuthenticated()">
+                                <a th:href="@{/login}">
+                                    <div th:if="${company.imagePath2 != null}">
+                                        <img th:src="@{/uploads/{imagePath2}(imagePath2=${company.imagePath2})}"
+                                             alt="Company Image" class="anhbia">
+                                    </div>
+                                    <div th:if="${company.imagePath1 != null}">
+                                        <img th:src="@{/uploads/{imagePath1}(imagePath1=${company.imagePath1})}"
+                                             alt="Company Image" class="logo">
+                                    </div>
+                                    <h5 class="card-title">
+                                        <h5 th:text="${company.name}"></h5>
+                                    </h5>
+                                    <p class="card-text" th:text="${company.description}"></p>
+                                </a>
+                            </div>
+                            <div sec:authorize="isAuthenticated()">
+                                <a style="text-decoration: none;" th:href="@{/companies/detail/{id}(id=${company.id})}">
+                                    <div th:if="${company.imagePath2 != null}">
+                                        <img th:src="@{/uploads/{imagePath2}(imagePath2=${company.imagePath2})}"
+                                             alt="Company Image" class="anhbia">
+                                    </div>
+                                    <div th:if="${company.imagePath1 != null}">
+                                        <img th:src="@{/uploads/{imagePath1}(imagePath1=${company.imagePath1})}"
+                                             alt="Company Image" class="logo">
+                                    </div>
+                                    <h5 class="card-title">
+                                        <h5 th:text="${company.name}"></h5>
+                                    </h5>
+                                    <p class="card-text" th:text="${company.description}"></p>
+                                </a>
+                            </div>
+
+                        </div>
+                        <div sec:authorize="hasAuthority('ADMIN')" class="card-footer">
+                            <a th:href="@{/companies/edit/{id}(id=${company.id})}"
+                               class="btn btn-success btn-sm">Edit</a>
+                            <a th:href="@{/companies/delete/{id}(id=${company.id})}"
+                               class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- =========================-->
+</div>
+<th:block th:replace="Layout :: footer"></th:block>
+</body>
+</html>

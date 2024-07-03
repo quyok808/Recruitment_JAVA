@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <th:block th:include="Layout :: logo-and-css"></th:block>
+
+    <style>
+        h1 {
+            color: #333;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .table th, .table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .table th {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .table tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .btn-group a {
+            margin-right: 10px;
+        }
+    </style>
+    <style>
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px; /* khoảng cách giữa các card */
+        }
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            width: calc(25% - 10px); /* 4 card mỗi hàng và trừ đi khoảng cách */
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            margin-bottom: 10px; /* khoảng cách giữa các hàng card */
+        }
+        .card h3 {
+            margin: 0 0 10px;
+            font-size: 1.2em;
+        }
+        .card p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<th:block th:replace="Layout :: header"></th:block>
+<div class="container">
+
+    <!-- =========================-->
+    <h1 style="text-align: center;">DANH SÁCH CÁC NGÀNH NGHỀ</h1>
+    <div class="btn-container text-right">
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/job-positions/add}" class="btn btn-primary"
+           style="margin: 10px;">Thêm ngành nghề</a>
+    </div>
+    <div class="card-container">
+
+        <div class="card" th:each="jobPosition : ${jobPositions}">
+            <a th:href="@{/job-positions/detail/{id}(id=${jobPosition.id})}"
+               style="text-decoration: none; color: black;">
+                <h3 th:text="${jobPosition.title}">Card 1</h3>
+                <p th:text="${jobPosition.description}">Mô tả của Card 1.</p>
+                <div sec:authorize="hasAuthority('ADMIN')"
+                     style="display: flex; justify-content: space-between; margin: 10px;">
+                    <a th:href="@{/job-positions/delete/{id}(id=${jobPosition.id})}" class="btn btn-danger btn-sm"
+                       onclick="return confirm('Are you sure?')">Delete</a>
+                    <a th:href="@{/job-positions/edit/{id}(id=${jobPosition.id})}"
+                       class="btn btn-success btn-sm">Edit</a>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+    <!-- =========================-->
+</div>
+<th:block th:replace="Layout :: footer"></th:block>
+</body>
+</html>
