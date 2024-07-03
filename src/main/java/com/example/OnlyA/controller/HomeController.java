@@ -31,7 +31,8 @@ public class HomeController {
         List<Recruiter> recruiters = recruiterService.getAllRecruiters();
         model.addAttribute("recruiter", recruiters);
         model.addAttribute("company", companies);
-        model.addAttribute("jobPosting", jobPosting);
+        model.addAttribute("jobPostings", jobPosting);
         return "Home/index";
     }
+
 }

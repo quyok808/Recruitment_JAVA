@@ -9,11 +9,11 @@
 </head>
 <body>
 <section layout:fragment="content" class="container mt-5">
-    <h1 class="mb-4">Form Company</h1>
+    <h1 class="mb-4">ĐĂNG KÍ CÔNG TY MỚI</h1>
     <form th:action="@{/companies/add}" th:object="${company}" method="post" class="needs-validation" novalidate
           enctype="multipart/form-data">
         <div class="mb-3">
-            <label for="name" class="form-label">Company Name:</label>
+            <label for="name" class="form-label">Tên công ty:</label>
             <input type="text" id="name" th:field="*{name}" class="form-control"/>
             <div class="text-danger" th:if="${#fields.hasErrors('name')}"
                  th:errors="*{name}"></div>
@@ -27,12 +27,12 @@
             <input type="file" name="imageFile1" id="imageFile1" class="form-control">
         </div>
         <div class="mb-3">
-            <label for="description" class="form-label">Description:</label>
+            <label for="description" class="form-label">Mô tả:</label>
             <textarea th:field="*{description}" class="form-control"
                       id="description"></textarea>
         </div>
         <div class="mb-3">
-            <label for="diachi" class="form-label">Address:</label>
+            <label for="diachi" class="form-label">Địa chỉ:</label>
             <textarea th:field="*{diachi}" class="form-control"
                       id="diachi" required></textarea>
         </div>

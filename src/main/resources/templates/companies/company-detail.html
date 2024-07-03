@@ -75,7 +75,7 @@
         .frame-below-banner {
             background-color: #ffffff;
             border-radius: 10px;
-            width: 700px;
+            width: 1100px;
             margin-left: 210px;
             margin-top: 30px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -83,10 +83,10 @@
         .frame-below-banner-bottom{
             background-color: #ffffff;
             border-radius: 10px;
-            width: 700px;
+            width: 1100px;
             margin-left: 210px;
-            height:400px;
-            margin-top: 180px;
+            height:200px;
+            margin-top: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
@@ -100,6 +100,12 @@
             border-top-right-radius: 10px;
         }
         .frame-content {
+            padding: 20px;
+            max-height: 140px; /* Initial height */
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .frame-content-right {
             padding: 20px;
             max-height: 140px; /* Initial height */
             overflow: hidden;
@@ -163,15 +169,15 @@
         </div>
         <button class="toggle-button" onclick="toggleContent()">Xem thêm &#x25BC;</button>
     </div>
-    <div class="frame-below-banner-right">
-        <div class="frame-header">
-            THÔNG TIN LIÊN HỆ
-        </div>
-        <div class="frame-content">
-            <!-- Nội dung cho khung bên phải -->
+<!--    <div class="frame-below-banner-right">-->
+<!--        <div class="frame-header">-->
+<!--            THÔNG TIN LIÊN HỆ-->
+<!--        </div>-->
+<!--        <div class="frame-content-right">-->
+<!--            &lt;!&ndash; Nội dung cho khung bên phải &ndash;&gt;-->
 
-        </div>
-    </div>
+<!--        </div>-->
+<!--    </div>-->
 
     <div class="frame-below-banner-bottom">
         <div class="frame-header">

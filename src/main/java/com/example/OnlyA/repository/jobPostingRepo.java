@@ -11,4 +11,6 @@ import java.util.Optional;
 @Repository
 public interface jobPostingRepo extends JpaRepository<JobPosting, String> {
     List<JobPosting> findByRecruiter(Optional<Recruiter> recruiter);
+
+    List<JobPosting> findByJobTitleContaining(String keyword);
 }

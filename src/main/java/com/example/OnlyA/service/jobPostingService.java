@@ -68,4 +68,8 @@ public class jobPostingService {
         }
         jobPostingRepository.deleteById(id);
     }
+
+    public List<JobPosting> searchJobPostings(String keyword) {
+        return jobPostingRepository.findByJobTitleContaining(keyword);
+    }
 }

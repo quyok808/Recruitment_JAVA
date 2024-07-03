@@ -60,16 +60,16 @@
             display: flex;
             flex-wrap: wrap;
             gap: 10px; /* khoảng cách giữa các card */
-            justify-content: space-between; /* phân bố đều các card trên 1 hàng */
         }
         .card {
             border: 1px solid #ccc;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             padding: 10px;
-            width: calc(20% - 10px); /* 5 card mỗi hàng và trừ đi khoảng cách */
+            width: calc(25% - 10px); /* 4 card mỗi hàng và trừ đi khoảng cách */
             box-sizing: border-box;
             background-color: #f9f9f9;
+            margin-bottom: 10px; /* khoảng cách giữa các hàng card */
         }
         .card h3 {
             margin: 0 0 10px;
@@ -85,15 +85,14 @@
 <div class="container">
 
     <!-- =========================-->
-    <h1 style="text-align: center;">Danh sách cac nganh nghe</h1>
+    <h1 style="text-align: center;">DANH SÁCH CÁC NGÀNH NGHỀ</h1>
     <div class="btn-container text-right">
         <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/job-positions/add}" class="btn btn-primary"
-           style="margin: 10px;">The nghe
-            moi</a>
+           style="margin: 10px;">Thêm ngành nghề</a>
     </div>
-    <div class="card-container" th:each="jobPosition : ${jobPositions}">
+    <div class="card-container">
 
-        <div class="card">
+        <div class="card" th:each="jobPosition : ${jobPositions}">
             <a th:href="@{/job-positions/detail/{id}(id=${jobPosition.id})}"
                style="text-decoration: none; color: black;">
                 <h3 th:text="${jobPosition.title}">Card 1</h3>

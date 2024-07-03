@@ -4,198 +4,137 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>OnlyA Recruitment Website</title>
-    <link href="/css/styles.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="/images/Logo_Web.png" rel="icon" type="image/x-icon"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="/images/Logo_Web.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        *{
-            margin:0;
+        * {
+            margin: 0;
             padding: 0;
+        }
+        .job-posting-container {
+            margin-top: 30px;
+        }
+        .job-posting-header {
+            margin-bottom: 20px;
+        }
+        .job-posting-details {
+            margin-bottom: 30px;
+        }
+        .job-posting-actions a {
+            margin-right: 10px;
         }
     </style>
 </head>
-<body>
-<nav class="navbar">
-    <div class="menu-icon" onclick="toggleVerticalMenu()">&#9776;</div>
-    <ul class="horizontal-menu">
-        <li>
-            <a href="/"><img alt="LOGO ICON" class="LOGO_IMG" src="/images/logoHome.png"></a>
-        </li>
-        <li>
-            <a href="/tuyendung/company-info">Thông tin công ty</a>
-        </li>
-        <li>
-            <a href="/tuyendung">Quản lý công việc</a>
-            <ul class="submenu">
-                <li><a href="/addJobPost">Đăng tin tuyển dụng</a></li>
-                <li><a href="/application">Danh sách ứng viên</a></li>
-            </ul>
-        </li>
-    </ul>
-
-    <ul style="margin-left: auto;display:flex;">
-        <a th:href="@{/account}" style="text-decoration: none;">
-            <ul class="login-button">
-                <button class="animated-button1">
-                    <svg class="arr-21" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-                    </svg>
-                    <span class="text1">A C C O U N T</span>
-                    <span class="circle1"></span>
-                    <svg class="arr-11" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
-                    </svg>
-                </button>
-            </ul>
-        </a>
-
+<body class="bg-gray-100 text-gray-900">
+<nav class="bg-white shadow-md">
+    <div class="container mx-auto p-4 flex justify-between items-center">
+        <div class="flex items-center">
+            <a href="/" class="ml-4"><img src="/images/logoHome.png" alt="LOGO ICON" class="h-10"></a>
+        </div>
+        <ul class="flex space-x-4">
+            <li><a href="/tuyendung/company-info" class="hover:underline">Thông tin công ty</a></li>
+            <li class="relative">
+                <a href="/tuyendung" class="hover:underline">Quản lý công việc</a>
+                <ul class="absolute hidden bg-white shadow-md">
+                    <li><a href="/addJobPost" class="block px-4 py-2 hover:bg-gray-200">Đăng tin tuyển dụng</a></li>
+                    <li><a href="/application" class="block px-4 py-2 hover:bg-gray-200">Danh sách ứng viên</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="flex items-center ml-auto space-x-4">
+            <li>
+                <a href="/account" class="hover:underline">
+                    <button class="bg-blue-600 text-white py-2 px-4 rounded-lg flex items-center space-x-2">
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                        </svg>
+                        <span>ACCOUNT</span>
+                    </button>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<nav class="vertical-menu bg-gray-800 text-white fixed inset-y-0 left-0 transform -translate-x-full transition-transform duration-200"
+     id="verticalMenu">
+    <ul class="p-4 space-y-2">
+        <li><a href="#home" class="block px-4 py-2 hover:bg-gray-700">VIỆC LÀM</a></li>
+        <li><a href="#about" class="block px-4 py-2 hover:bg-gray-700">HỒ SƠ & CV</a></li>
+        <li><a href="#services" class="block px-4 py-2 hover:bg-gray-700">CÔNG TY</a></li>
+        <li><a href="#contact" class="block px-4 py-2 hover:bg-gray-700">CẨM NANG NGHỀ NGHIỆP</a></li>
     </ul>
 </nav>
-<nav class="vertical-menu" id="verticalMenu">
-    <ul>
-        <li><a href="#home">VIỆC LÀM</a></li>
-        <li><a href="#about">HỒ SƠ & CV</a></li>
-        <li><a href="#services">CÔNG TY</a></li>
-        <!-- <li><a href="#contact">CÔNG CỤ</a>  -->
-        <li><a href="#contact">CẨM NANG NGHỀ NGHIỆP</a>
-    </ul>
-</nav>
-
-<div>
-    <h4>Job Posting</h4>
-    <hr>
-    <dl class="row">
-        <dt class="col-sm-2">Title</dt>
-        <dd class="col-sm-10" th:text="${jobPost.jobTitle}"></dd>
-        <dt class="col-sm-2">Description</dt>
-        <dd class="col-sm-10" th:text="${jobPost.jobDescription}"></dd>
-        <dt class="col-sm-2">Location</dt>
-        <dd class="col-sm-10" th:text="${jobPost.location}"></dd>
-        <dt class="col-sm-2">Date Posted</dt>
-        <dd class="col-sm-10" th:text="${jobPost.datePosted}"></dd>
-        <dt class="col-sm-2">Total Applications</dt>
-        <dd class="col-sm-10" th:text="${jobPost.totalApplications}"></dd>
-    </dl>
+<div class="container mx-auto mt-10 p-6 bg-white shadow-md rounded-lg job-posting-container">
+    <div class="job-posting-header">
+        <h4 class="text-2xl font-semibold">Job Posting</h4>
+        <hr class="mt-2">
+    </div>
+    <div class="job-posting-details">
+        <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <dt class="font-medium">Title</dt>
+                <dd class="text-gray-700" th:text="${jobPost.jobTitle}"></dd>
+            </div>
+            <div>
+                <dt class="font-medium">Description</dt>
+                <dd class="text-gray-700" th:text="${jobPost.jobDescription}"></dd>
+            </div>
+            <div>
+                <dt class="font-medium">Location</dt>
+                <dd class="text-gray-700" th:text="${jobPost.location}"></dd>
+            </div>
+            <div>
+                <dt class="font-medium">Date Posted</dt>
+                <dd class="text-gray-700" th:text="${jobPost.datePosted}"></dd>
+            </div>
+            <div>
+                <dt class="font-medium">Total Applications</dt>
+                <dd class="text-gray-700" th:text="${jobPost.totalApplications}"></dd>
+            </div>
+        </dl>
+    </div>
+    <div class="job-posting-actions flex space-x-4">
+        <a th:href="@{/edit/{id}(id=${jobPost.jobID})}" class="btn btn-primary">Edit</a>
+        <a th:href="@{/tuyendung}" class="btn btn-secondary">Back to list</a>
+    </div>
 </div>
-<div>
-    <a th:href="@{/edit/{id}(id=${jobPost.jobID})}">Edit</a>
-    <a th:href="@{/tuyendung}">Back to list</a>
-</div>
-
-<footer>
-    <div class="footer-container">
+<footer class="bg-gray-800 text-white mt-10">
+    <div class="container mx-auto py-6 grid grid-cols-1 md:grid-cols-4 gap-4">
         <div class="footer-column">
-            <h3>About Us</h3>
-            <p>We are dedicated to connecting the best talent with the best companies. Join us to find your dream job or
-                the perfect candidate.</p>
+            <h3 class="text-lg font-semibold">About Us</h3>
+            <p class="text-gray-400">We are dedicated to connecting the best talent with the best companies. Join us to
+                find your dream job or the perfect candidate.</p>
         </div>
         <div class="footer-column">
-            <h3>Quick Links</h3>
+            <h3 class="text-lg font-semibold">Quick Links</h3>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Jobs</a></li>
-                <li><a href="#">Companies</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li><a href="#" class="hover:underline">Home</a></li>
+                <li><a href="#" class="hover:underline">Jobs</a></li>
+                <li><a href="#" class="hover:underline">Companies</a></li>
+                <li><a href="#" class="hover:underline">Contact Us</a></li>
             </ul>
         </div>
         <div class="footer-column">
-            <h3>Follow Us</h3>
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
+            <h3 class="text-lg font-semibold">Follow Us</h3>
+            <div class="flex space-x-2">
+                <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
         <div class="footer-column">
-            <h3>Contact Us</h3>
-            <p>Email: support@OnlyA.com</p>
-            <p>Phone: 0358361511</p>
-            <p>Address: 10/80C Xa lộ Hà Nội, phường Hiệp Phú, quận 9, TP. Thủ Đức, TP.HCM</p>
+            <h3 class="text-lg font-semibold">Contact Us</h3>
+            <p class="text-gray-400">Email: support@OnlyA.com</p>
+            <p class="text-gray-400">Phone: 0358361511</p>
+            <p class="text-gray-400">Address: 10/80C Xa lộ Hà Nội, phường Hiệp Phú, quận 9, TP. Thủ Đức, TP.HCM</p>
         </div>
     </div>
-    <div class="footer-bottom">
+    <div class="bg-gray-900 text-center py-4">
         <p>&copy; 2024 OnlyA Recruitment Website. All rights reserved.</p>
     </div>
 </footer>
-
-<script>
-    function toggleVerticalMenu() {
-        const verticalMenu = document.getElementById('verticalMenu');
-        verticalMenu.classList.toggle('active');
-        if (verticalMenu.classList.contains('active')) {
-            document.addEventListener('click', hideMenuOnClickOutside);
-        } else {
-            document.removeEventListener('click', hideMenuOnClickOutside);
-        }
-    }
-    function hideMenuOnClickOutside(event) {
-        const menuIcon = document.querySelector('.menu-icon');
-        const verticalMenu = document.getElementById('verticalMenu');
-        if (!verticalMenu.contains(event.target) && !menuIcon.contains(event.target)) {
-            verticalMenu.classList.remove('active');
-            document.removeEventListener('click', hideMenuOnClickOutside);
-        }
-    }
-    function toggleDropdown() {
-        var dropdown = document.getElementById('dropdown-content');
-        if (dropdown.style.display === 'block') {
-            dropdown.style.display = 'none';
-        } else {
-            dropdown.style.display = 'block';
-        }
-    }
-
-    function selectOption(option) {
-        document.getElementById('search-input').value = option;
-        document.getElementById('dropdown-content').style.display = 'none';
-    }
-
-    window.onclick = function(event) {
-        if (!event.target.closest('.ui-input-icon')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            for (var i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.style.display === 'block') {
-                    openDropdown.style.display = 'none';
-                }
-            }
-        }
-    }
-</script>
-<script>
-    let slideIndex = 1;
-    showSlides(slideIndex);
-
-    function plusSlides(n) {
-        showSlides(slideIndex += n);
-    }
-
-    function currentSlide(n) {
-        showSlides(slideIndex = n);
-    }
-
-    function showSlides(n) {
-        let i;
-        let slides = document.getElementsByClassName("mySlides");
-        let dots = document.getElementsByClassName("dot");
-        if (n > slides.length) {slideIndex = 1}
-        if (n < 1) {slideIndex = slides.length}
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex-1].style.display = "block";
-        dots[slideIndex-1].className += " active";
-    }
-</script>
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
 </body>
 </html>
+
