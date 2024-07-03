@@ -2,8 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>OnlyA - Website Recruiterment</title>
     <th:block th:include="Layout :: logo-and-css"></th:block>
+    <link rel="stylesheet" href="src/main/resources/static/css/styles.css">
+
 
 </head>
 <body>
@@ -77,88 +79,12 @@
         <button> Tìm</button>
 
         <div class="post-grid">
-            <!-- Bài viết 1 -->
-            <div class="post">
-                <h2>Bài viết 1</h2>
-                <p>Nội dung của bài viết 1</p>
+            <div class="post" th:each="jobpostings : ${jobPosting}">
+                <h2 th:text="${jobpostings.jobTitle}">Job Title</h2>
+                <p th:text="${jobpostings.jobDescription}">Job Description</p>
             </div>
-            <!-- Bài viết 2 -->
-            <div class="post">
-                <h2>Bài viết 2</h2>
-                <p>Nội dung của bài viết 2</p>
-            </div>
-            <!-- Bài viết 3 -->
-            <div class="post">
-                <h2>Bài viết 3</h2>
-                <p>Nội dung của bài viết 3</p>
-            </div>
-            <!-- Bài viết 4 -->
-            <div class="post">
-                <h2>Bài viết 4</h2>
-                <p>Nội dung của bài viết 4</p>
-            </div>
-            <!-- Bài viết 5 -->
-            <div class="post">
-                <h2>Bài viết 5</h2>
-                <p>Nội dung của bài viết 5</p>
-            </div>
-            <!-- Bài viết 6 -->
-            <div class="post">
-                <h2>Bài viết 6</h2>
-                <p>Nội dung của bài viết 6</p>
-            </div>
-            <!-- Bài viết 7 -->
-            <div class="post">
-                <h2>Bài viết 7</h2>
-                <p>Nội dung của bài viết 7</p>
-            </div>
-            <!-- Bài viết 8 -->
-            <div class="post">
-                <h2>Bài viết 8</h2>
-                <p>Nội dung của bài viết 8</p>
-            </div>
-            <!-- Bài viết 1 -->
-            <div class="post">
-                <h2>Bài viết 1</h2>
-                <p>Nội dung của bài viết 1</p>
-            </div>
-            <!-- Bài viết 2 -->
-            <div class="post">
-                <h2>Bài viết 2</h2>
-                <p>Nội dung của bài viết 2</p>
-            </div>
-            <!-- Bài viết 3 -->
-            <div class="post">
-                <h2>Bài viết 3</h2>
-                <p>Nội dung của bài viết 3</p>
-            </div>
-            <!-- Bài viết 4 -->
-            <div class="post">
-                <h2>Bài viết 4</h2>
-                <p>Nội dung của bài viết 4</p>
-            </div>
-            <!-- Bài viết 5 -->
-            <div class="post">
-                <h2>Bài viết 5</h2>
-                <p>Nội dung của bài viết 5</p>
-            </div>
-            <!-- Bài viết 6 -->
-            <div class="post">
-                <h2>Bài viết 6</h2>
-                <p>Nội dung của bài viết 6</p>
-            </div>
-            <!-- Bài viết 7 -->
-            <div class="post">
-                <h2>Bài viết 7</h2>
-                <p>Nội dung của bài viết 7</p>
-            </div>
-            <!-- Bài viết 8 -->
-            <div class="post">
-                <h2>Bài viết 8</h2>
-                <p>Nội dung của bài viết 8</p>
-            </div>
-
         </div>
+
     </div>
     <h1>TOP CÔNG TY HÀNG ĐẦU</h1>
     <a class="Btn2 prev2" onclick="plusSlides(-1)">

@@ -45,7 +45,7 @@ public class TuyenDungController {
         User user = UserService.timtheousername(username);
         Recruiter recruiterid = recruiterService.findRecruitersByUser(user);
         if (UserService.userHasCompany(username) == 1) {
-            List<JobPosting> postLists = JobPostingService.getAllPosts();
+            List<JobPosting> postLists = JobPostingService.getAllPostsByRecruiterID(recruiterid.getRecruiterID());
             model.addAttribute("postLists", postLists);
             int SLPost = postLists.size();
             model.addAttribute("SLPost", SLPost);

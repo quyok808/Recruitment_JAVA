@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="vi" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -13,6 +13,70 @@
         *{
             margin:0;
             padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(90deg, #0dc5ea3e, #0a11ee35);
+            margin: 0;
+            padding: 0;
+<!--            display: flex;-->
+            justify-content: center;
+            align-items: center;
+<!--            filter: blur(10px);-->
+            height: 100vh;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .job-form {
+            background: none;
+            padding: 20px;
+            width: 100%;
+            max-width: 700px;
+            margin-top:20px;
+            margin-left:400px;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: none;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 16px;
+            margin-top:30px;
+            margin-left:700px;
+            margin-bottom:100px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -36,55 +100,70 @@
     </ul>
 
     <ul style="margin-left: auto;display:flex;">
-        <a th:href="@{/account}" style="text-decoration: none;">
-            <ul class="login-button">
+        <div class="dropdown">
+            <a th:href="@{${#authentication.principal == null} ? '/login' : '/login'}" style="text-decoration: none;"
+               onmouseout="hideDropdownOnMouseOut()">
+
                 <button class="animated-button1">
                     <svg class="arr-21" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
                     </svg>
-                    <span class="text1">A C C O U N T</span>
+                    <span class="text1" sec:authorize="isAuthenticated()">Xin chào, <span
+                            sec:authentication="name"></span></span>
+                    <span class="text1" sec:authorize="!isAuthenticated()">L O G I N</span>
                     <span class="circle1"></span>
                     <svg class="arr-11" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
                     </svg>
                 </button>
-            </ul>
-        </a>
-
-    </ul>
-</nav>
-<nav class="vertical-menu" id="verticalMenu">
-    <ul>
-        <li><a href="#home">VIỆC LÀM</a></li>
-        <li><a href="#about">HỒ SƠ & CV</a></li>
-        <li><a href="#services">CÔNG TY</a></li>
-        <!-- <li><a href="#contact">CÔNG CỤ</a>  -->
-        <li><a href="#contact">CẨM NANG NGHỀ NGHIỆP</a>
+            </a>
+            <div class="dropdown-content" sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit">Logout</button>
+                </form>
+            </div>
+        </div>
     </ul>
 </nav>
 
-<h1>Add Job Post</h1>
-<form th:action="@{/addJobPost}" th:object="${jobPost}" method="post">
-    <div>
-        <label for="recruiter">Recruiter:</label>
-        <select id="recruiter" th:field="*{recruiter.recruiterID}">
-            <option th:each="recruiter : ${recruiters}" th:value="${recruiter.recruiterID}"
-                    th:text="${recruiter.companyName}"></option>
-        </select>
-    </div>
-    <div>
-        <label for="jobTitle">Job Title:</label>
+<form th:action="@{/addJobPost}" th:object="${jobPost}" method="post" class="job-form">
+
+    <div class="form-group">
+        <label for="jobTitle">Tiêu de:</label>
         <input type="text" id="jobTitle" th:field="*{jobTitle}"/>
     </div>
-    <div>
-        <label for="jobDescription">Job Description:</label>
+    <div class="form-group">
+        <label for="jobp">Vi trí:</label>
+        <select id="jobp" class="form-control" th:field="*{jobposition.id}">
+            <option value="">-- Chọn vị trí --</option>
+            <option th:each="jobPosition : ${jopposition}"
+                    th:value="${jobPosition.id}"
+                    th:text="${jobPosition.title}"></option>
+        </select>
+    </div>
+
+
+    <div class="form-group">
+        <label for="jobDescription">Mô tả công việc:</label>
         <textarea id="jobDescription" th:field="*{jobDescription}"></textarea>
     </div>
-    <div>
-        <label for="location">Location:</label>
+    <div class="form-group">
+        <label for="location">Địa điểm:</label>
         <input type="text" id="location" th:field="*{location}"/>
     </div>
-    <button type="submit">Add Job Post</button>
+    <div class="form-group">
+        <label for="MucLuong">Muc Luong:</label>
+        <input type="text" id="MucLuong" th:field="*{mucLuong}"/>
+    </div>
+    <div class="form-group">
+        <label for="Kinhnghiem">Kinh nghiệm:</label>
+        <input type="text" id="Kinhnghiem" th:field="*{kinhnghiem}"/>
+    </div>
+    <div class="form-group">
+        <label for="HinhThucLamViec">Hình thức làm việc:</label>
+        <input type="text" id="HinhThucLamViec" th:field="*{hinhThucLamViec}"/>
+    </div>
+    <button type="submit" class="btn">Đăng tuyển</button>
 </form>
 
 <footer>

@@ -28,6 +28,9 @@
             <li>
                 <a href="/companies">CÔNG TY</a>
             </li>
+            <li>
+                <a sec:authorize="hasAuthority('PERSONAL')" href="/candidate">HỒ SƠ & CV</a>
+            </li>
         </ul>
         <ul style="margin-left: auto;display:flex;">
 
@@ -40,7 +43,7 @@
                     </button>
                 </ul>
             </a>
-            <span sec:authorize="isAuthenticated()">Xin chào, <span
+            <span style="margin: 8px;" sec:authorize="isAuthenticated()">Xin chào, <span
                     sec:authentication="name"></span></span>
             <div class="dropdown">
                 <a th:href="@{${#authentication.principal == null} ? '/login' : '/login'}"

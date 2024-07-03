@@ -31,9 +31,9 @@ public class RecruiterService {
 
     public Recruiter findRecruitersByUser(User user) {
         List<Recruiter> recruiters = RecruiterRepository.findByUser(user);
-        if (recruiters.isEmpty()) {
-            throw new NoSuchElementException("No recruiters found for user: " + user.getUsername());
-        }
+//        if (recruiters.isEmpty()) {
+//            throw new NoSuchElementException("No recruiters found for user: " + user.getUsername());
+//        }
         return recruiters.getFirst();
     }
 

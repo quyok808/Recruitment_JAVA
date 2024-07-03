@@ -56,6 +56,38 @@
             text-decoration: underline; /* Gạch chân khi hover */
         }
     </style>
+    <style>
+        .container-tong {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 16px;
+            background-color: #ffffff;
+            margin-left: 50px;
+            margin-top:20px;
+        }
+        .card-body {
+            padding: 16px;
+        }
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+        .card-text {
+            font-size: 1rem;
+        }
+        .card-img {
+            width: 150px; /* Make the image square */
+            height: 150px; /* Make the image square */
+            object-fit: cover; /* Ensure the image covers the area */
+            margin-right: 16px;
+            border-radius: 4px; /* Optional: Add some rounding to the image corners */
+        }
+    </style>
 </head>
 <body>
 <th:block th:replace="Layout :: header"></th:block>
