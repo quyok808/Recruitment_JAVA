@@ -1,8 +1,12 @@
 package com.example.OnlyA.controller;
 
+import com.example.OnlyA.model.JobPosition;
 import com.example.OnlyA.model.JobPosting;
+import com.example.OnlyA.model.Recruiter;
+import com.example.OnlyA.service.JobPositionService;
 import com.example.OnlyA.service.RecruiterService;
 import com.example.OnlyA.service.jobPostingService;
+import com.example.OnlyA.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +14,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
+
+
+//them controller TuyenDungPage 1/7/2024 (PostManagement)
 
 @Controller
 public class PostController {
@@ -22,19 +29,30 @@ public class PostController {
 
     @Autowired
     private RecruiterService recruiterService;
+    @Autowired
+    private JobPositionService jobPositionService;
+
+    @Autowired
+    private userService UserService;
 
     private static final Logger LOGGER = Logger.getLogger(PostController.class.getName());
 
     @GetMapping("/addJobPost")
     public String showAddJobPostForm(Model model) {
         model.addAttribute("jobPost", new JobPosting());
-        model.addAttribute("recruiters", recruiterService.getAllRecruiters());
+        List<JobPosition> jobPositions = jobPositionService.getAllJobPositions();
+        model.addAttribute("jopposition", jobPositions);
+
         return "Post/formAddPost";
     }
 
     @PostMapping("/addJobPost")
     public String addJobPost(@ModelAttribute JobPosting jobPost) {
         jobPost.setDatePosted(LocalDate.now());
+
+        String username = UserService.getLoggedInUsername();
+        Recruiter recruiter = recruiterService.findRecruitersByUser(UserService.timtheousername(username));
+        jobPost.setRecruiter(recruiter);
         JobPostService.addJobPosting(jobPost);
         return "redirect:/tuyendung";
     }
@@ -92,7 +110,20 @@ public class PostController {
             model.addAttribute("jobPost", temp);
             return "Post/Detail";
         } else {
-            return "Làm gì có sách này mà đọc";
+            return "Khong co bai viet nay !!!";
         }
     }
+
+    @GetMapping("/search")
+    public String searchJobPostings(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
+        List<JobPosting> searchResults;
+        if (keyword == null || keyword.isEmpty()) {
+            searchResults = JobPostService.getAllPosts(); // Phương thức này trả về tất cả các bài đăng
+        } else {
+            searchResults = JobPostService.searchJobPostings(keyword);
+        }
+        model.addAttribute("jobPostings", searchResults);
+        return "Home/index";
+    }
+
 }

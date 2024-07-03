@@ -2,23 +2,44 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
-    <th:block th:replace="layout :: link-css"></th:block>
+    <title>OnlyA - Website Recruiterment</title>
+    <th:block th:include="Layout :: logo-and-css"></th:block>
+    <link rel="stylesheet" href="src/main/resources/static/css/styles.css">
+
+
 </head>
 <body>
-<th:block th:replace="layout :: header"></th:block>
+<th:block th:replace="Layout :: header"></th:block>
 <div class="container">
-    <!-- Viết code ở đây-->
-    <div class="banner"></div>
+    <div class="slide-show">
+        <div class="list-images">
+            <img src="/slider/slider1.png" width="100%" alt="No Image">
+            <img src="/slider/slider2.png" width="100%" alt="No Image">
+            <img src="/slider/slider3.png" width="100%" alt="No Image">
+            <img src="/slider/slider4.png" width="100%" alt="No Image">
+        </div>
+        <div class="btns">
+            <div class="btn-left btn1"><i class='bx bx-chevron-left'></i></div>
+            <div class="btn-right btn1"><i class='bx bx-chevron-right'></i></div>
+        </div>
+    </div>
     <div class="container-tong">
 
         <div class="ui-input-container">
-            <input
-                    class="ui-input"
-                    placeholder="Tìm kiếm..."
-                    required=""
-                    type="text"
-            />
+            <!--            <input type="text" name="keyword" placeholder="Tìm kiếm theo tiêu đề công việc">-->
+            <form action="/search" method="get" style="
+    display: flex;">
+                <input
+                        class="ui-input"
+                        placeholder="Tìm kiếm..."
+
+                        type="text"
+                        name="keyword"
+                />
+                <button type="submit" style="
+    margin-left: 280px;">Tìm kiếm
+                </button>
+            </form>
             <div class="ui-input-underline"></div>
             <div class="ui-input-highlight"></div>
             <div class="ui-input-icon">
@@ -41,6 +62,7 @@
                     readonly
                     required=""
                     type="text"
+                    style="padding-bottom: 18px;"
             />
             <div class="ui-input-underline"></div>
             <div class="ui-input-highlight"></div>
@@ -50,60 +72,167 @@
                 </svg>
             </div>
             <div class="dropdown-content" id="dropdown-content">
-                <a href="#" onclick="selectOption('Option 1')">Option 1</a>
-                <a href="#" onclick="selectOption('Option 2')">Option 2</a>
-                <a href="#" onclick="selectOption('Option 3')">Option 3</a>
+                <a href="#" onclick="selectOption('Hanoi')">Ha Noi</a>
+                <a href="#" onclick="selectOption('Ho Chi Minh')">Ho Chi Minh</a>
+                <a href="#" onclick="selectOption('Da Nang')">Da Nang</a>
+                <a href="#" onclick="selectOption('Hai Phong')">Hai Phong</a>
+                <a href="#" onclick="selectOption('Can Tho')">Can Tho</a>
+                <a href="#" onclick="selectOption('Nha Trang')">Nha Trang</a>
+                <a href="#" onclick="selectOption('Hue')">Hue</a>
+                <a href="#" onclick="selectOption('Vung Tau')">Vung Tau</a>
+                <a href="#" onclick="selectOption('Quang Ninh')">Quang Ninh</a>
+                <a href="#" onclick="selectOption('Binh Duong')">Binh Duong</a>
+            </div>
+
+        </div>
+
+
+        <div class="post-grid">
+            <div th:each="jobpostings : ${jobPostings}">
+                <div class="post">
+                    <h2 th:text="${jobpostings.jobTitle}">Bài viết 1</h2>
+                    <p th:text="${jobpostings.jobDescription}">Nội dung của bài viết 1</p>
+                </div>
             </div>
         </div>
-        <button> Tìm</button>
 
-        <div>
-            Bai post hien thi o day
-        </div>
+
     </div>
     <h1>TOP CÔNG TY HÀNG ĐẦU</h1>
-    <a class="Btn prev" onclick="plusSlides(-1)">
-        <svg class="arrow" height="1.2em" viewBox="0 0 512 512">
+    <a class="Btn2 prev2" onclick="plusSlides(-1)">
+        <svg height="1.2em" class="arrow2" viewBox="0 0 512 512">
             <path d="M105.4 278.6c-12.5-12.5-12.5-32.8 0-45.3l192-192c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3L173.3 256l169.4 169.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0l-192-192z"></path>
         </svg>
-        <p class="text">Previous</p>
+        <p class="text2">Previous</p>
     </a>
-    <a class="Btn next" onclick="plusSlides(1)">
-        <svg class="arrow" height="1.2em" viewBox="0 0 512 512">
+    <a class="Btn2 next2" onclick="plusSlides(1)">
+        <svg height="1.2em" class="arrow2" viewBox="0 0 512 512">
             <path d="M406.6 233.4c12.5-12.5 12.5-32.8 0-45.3l-192-192c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.7 256 169.4 425.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l192-192z"></path>
         </svg>
-        <p class="text">Next</p>
+        <p class="text2">Next</p>
     </a>
-    <div class="slideshow-container">
-        <div class="mySlides fade">
-            <div class="frame-container">
-                <div class="frame"></div>
-                <div class="frame"></div>
-                <div class="frame"></div>
-                <div class="frame"></div>
-
+    <div class="carousel2">
+        <div class="carousel-inner2">
+            <div class="slide2" style="background-color: #ffffff;">
+                <div class="box2">
+                    <img class="img2" src="https://dsa.org.vn/wp-content/uploads/2017/11/fpt-601x400.png" alt="anh1">
+                    <h2>CÔNG TY TNHH PHẦN MỀM FPT</h2>
+                </div>
+                <div class="box2">
+                    <img class="img2"
+                         src="https://inkythuatso.com/uploads/images/2021/11/logo-acb-vector-inkythuatso-01-10-10-25-09.jpg"
+                         alt="anh9">
+                    <h2>NGÂN HÀNG Á CHÂU ACB</h2>
+                </div>
+                <div class="box2">
+                    <img class="img2"
+                         src="https://inkythuatso.com/uploads/images/2021/11/logo-acb-vector-inkythuatso-01-10-10-25-09.jpg"
+                         alt="anh9">
+                    <h2>NGÂN HÀNG Á CHÂU ACB</h2>
+                </div>
+                <div class="box2">
+                    <img class="img2"
+                         src="https://cdn.nhanlucnganhluat.vn/uploads/images/904B9A27/logo/2018-09/logo.png" alt="anh4">
+                    <h2>CÔNG TY CỔ PHẦN SCI E&C</h2>
+                </div>
+            </div>
+            <div class="slide2" style="background-color: #ffffff;">
+                <div class="box2">
+                    <img class="img2"
+                         src="https://css.vnu.edu.vn/sites/default/files/anh_tin_tuc/tuyen_dung/may-lanh-daikin.jpeg"
+                         alt="anh5">
+                    <h2>CÔNG TY CỔ PHẦN DAIKIN AIR CONDITIONING</h2>
+                </div>
+                <div class="box2">
+                    <img class="img2" src="https://bachbao.com/wp-content/uploads/2020/08/Global.png" alt="anh6">
+                    <h2>CÔNG TY CỔ PHẦN CHỨNG KHOÁN SSI </h2>
+                </div>
+                <div class="box2">
+                    <img class="img2" src="https://sme.misa.vn/wp-content/uploads/2020/05/Hitachi-logo.jpg" alt="anh7">
+                    <h2>CÔNG TY TNHH HITACHI VANTARA VIETNAM</h2>
+                </div>
+                <div class="box2">
+                    <img class="img2"
+                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjVOv1eNXXLcUTEjA55cCOLqcKfWoHfJIUyA&s"
+                         alt="anh8">
+                    <h2>CÔNG TY CỔ PHẦN R2S</h2>
+                </div>
+            </div>
+            <div class="slide2" style="background-color: #ffffff;">
+                <div class="box2">
+                    <img class="img2"
+                         src="https://inkythuatso.com/uploads/images/2021/11/logo-acb-vector-inkythuatso-01-10-10-25-09.jpg"
+                         alt="anh9">
+                    <h2>NGÂN HÀNG Á CHÂU ACB</h2>
+                </div>
+                <div class="box2">
+                    <img class="img2" src="https://ecoduan.vn/wp-content/uploads/2022/05/logo-ecopark.jpg">
+                    <h2>CÔNG TY CỔ PHẦN TẬP DOÀN ECOPARK</h2>
+                </div>
+                <div class="box2">
+                    <img class="img2"
+                         src="https://haiphong.work/wp-content/uploads/2022/07/image_tai-xuong-1_010722-021841.png">
+                    <h2>CÔNG TY TNHH LG CNS VIỆT NAM</h2>
+                </div>
+                <div class="box2">
+                    <img class="img2"
+                         src="https://media.licdn.com/dms/image/D560BAQEZVKpU1mJ0Wg/company-logo_200_200/0/1695981678801/vng_corporation_logo?e=2147483647&v=beta&t=vmdPlWLA1MjeSjx006pVdTVltAib5Qho6H5-I9yNS3A">
+                    <h2>CÔNG TY CỔ PHẦN VNG</h2>
+                </div>
+            </div>
+            <div class="slide2" style="background-color: #ffffff;">
+                <div class="box2">
+                    <img class="img2"
+                         src="https://cdn-new.topcv.vn/unsafe/200x/https://static.topcv.vn/company_logos/cong-ty-tnhh-dksh-viet-nam-6362281fefdbe.jpg">
+                    <h2>CÔNG TY TNHH DKSH VIỆT NAM</h2>
+                </div>
+                <div class="box2">
+                    <img class="img2"
+                         src="https://cdn-new.topcv.vn/unsafe/200x/https://static.topcv.vn/company_logos/cong-ty-tnhh-dksh-viet-nam-6362281fefdbe.jpg">
+                    <h2>CÔNG TY TNHH DKSH VIỆT NAM</h2>
+                </div>
+                <div class="box2">
+                    <img class="img2"
+                         src="https://cdn-new.topcv.vn/unsafe/200x/https://static.topcv.vn/company_logos/cong-ty-tnhh-dksh-viet-nam-6362281fefdbe.jpg">
+                    <h2>CÔNG TY TNHH DKSH VIỆT NAM</h2>
+                </div>
+                <div class="box2">
+                    <img class="img2"
+                         src="https://cdn-new.topcv.vn/unsafe/200x/https://static.topcv.vn/company_logos/cong-ty-tnhh-dksh-viet-nam-6362281fefdbe.jpg">
+                    <h2>CÔNG TY TNHH DKSH VIỆT NAM</h2>
+                </div>
+            </div>
+            <!-- Clone of the first slide for the infinite effect -->
+            <div class="slide2" style="background-color: #ffffff;">
+                <div class="box2">
+                    <img class="img2" src="https://dsa.org.vn/wp-content/uploads/2017/11/fpt-601x400.png" alt="anh1">
+                    <h2>CÔNG TY TNHH PHẦN MỀM FPT</h2>
+                </div>
+                <div class="box2">
+                    <img class="img2"
+                         src="https://inkythuatso.com/uploads/images/2021/11/logo-acb-vector-inkythuatso-01-10-10-25-09.jpg"
+                         alt="anh9">
+                    <h2>NGÂN HÀNG Á CHÂU ACB</h2>
+                </div>
+                <div class="box2">
+                    <img class="img2"
+                         src="https://inkythuatso.com/uploads/images/2021/11/logo-acb-vector-inkythuatso-01-10-10-25-09.jpg"
+                         alt="anh9">
+                    <h2>NGÂN HÀNG Á CHÂU ACB</h2>
+                </div>
+                <div class="box2">
+                    <img class="img2"
+                         src="https://cdn.nhanlucnganhluat.vn/uploads/images/904B9A27/logo/2018-09/logo.png" alt="anh4">
+                    <h2>CÔNG TY CỔ PHẦN SCI E&C</h2>
+                </div>
             </div>
         </div>
-        <div class="mySlides fade">
-            <div class="frame-container">
-                <div class="frame"></div>
-                <div class="frame"></div>
-                <div class="frame"></div>
-                <div class="frame"></div>
-
-            </div>
+        <div class="carousel-indicators2">
+            <span class="indicator2 active2"></span>
+            <span class="indicator2"></span>
+            <span class="indicator2"></span>
+            <span class="indicator2"></span>
         </div>
-        <div class="mySlides fade">
-            <div class="frame-container">
-                <div class="frame"></div>
-                <div class="frame"></div>
-                <div class="frame"></div>
-                <div class="frame"></div>
-
-            </div>
-        </div>
-        <!-- Next and previous buttons -->
-
     </div>
 
     <div class="tag-body" style="margin: 10px 0; text-align: center;">
@@ -111,6 +240,79 @@
     </div>
     <!-- =========================-->
 </div>
-<th:block th:replace="layout :: footer"></th:block>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const slides = document.querySelectorAll('.slide2');
+        const indicators = document.querySelectorAll('.indicator2');
+        const carouselInner = document.querySelector('.carousel-inner2');
+        let currentIndex = 0;
+        const totalSlides = slides.length - 1; // Exclude the cloned slide
+        const slideWidth = slides[0].offsetWidth;
+        const intervalTime = 3000;
+        let isTransitioning = false;
+
+        function nextSlide() {
+            if (!isTransitioning) {
+                isTransitioning = true;
+                currentIndex++;
+                updateCarousel();
+                if (currentIndex >= totalSlides) {
+                    setTimeout(() => {
+                        carouselInner.style.transition = 'none';
+                        carouselInner.style.marginLeft = '0';
+                        currentIndex = 0;
+                        updateCarousel();
+                        setTimeout(() => {
+                            carouselInner.style.transition = 'margin-left 0.5s ease';
+                            isTransitioning = false;
+                        }, 50);
+                    }, 500); // Sync time with transition
+                } else {
+                    setTimeout(() => isTransitioning = false, 500);
+                }
+            }
+        }
+
+        function prevSlide() {
+            if (!isTransitioning) {
+                isTransitioning = true;
+                currentIndex--;
+                if (currentIndex < 0) {
+                    carouselInner.style.transition = 'none';
+                    currentIndex = totalSlides - 1;
+                    carouselInner.style.marginLeft = `-${currentIndex * slideWidth}px`;
+                    setTimeout(() => {
+                        carouselInner.style.transition = 'margin-left 0.5s ease';
+                        currentIndex--;
+                        updateCarousel();
+                        setTimeout(() => isTransitioning = false, 500);
+                    }, 50);
+                } else {
+                    updateCarousel();
+                    setTimeout(() => isTransitioning = false, 500);
+                }
+            }
+        }
+
+        function updateCarousel() {
+            const marginLeft = -currentIndex * slideWidth;
+            carouselInner.style.marginLeft = `${marginLeft}px`;
+
+            indicators.forEach((indicator, index) => {
+                if (index === currentIndex) {
+                    indicator.classList.add('active2');
+                } else {
+                    indicator.classList.remove('active2');
+                }
+            });
+        }
+
+        document.querySelector('.prev2').addEventListener('click', prevSlide);
+        document.querySelector('.next2').addEventListener('click', nextSlide);
+
+        setInterval(nextSlide, intervalTime);
+    });
+</script>
+<th:block th:replace="Layout :: footer"></th:block>
 </body>
 </html>

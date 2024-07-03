@@ -48,47 +48,47 @@ public class WebSecurity {
     public SecurityFilterChain securityFilterChain(@NotNull HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/css/**", "/js/**", "/", "/**", "/oauth/**", "/register", "/login", "/error", "/images/**", "/TAGCLOUD/**").permitAll()
+                        .requestMatchers("/css/**", "/js/**", "/", "/**", "/oauth/**", "/register", "/login", "/error", "/images/**", "/TAGCLOUD/**", "/slider/**").permitAll()
                         .requestMatchers("/admin", "/admin/**").permitAll()
-                        .requestMatchers("/tuyendung", "/tuyendung/**").permitAll()
                         .requestMatchers("/application", "/application/**").permitAll()
+                        .requestMatchers("/companies", "/companies/**").permitAll()
                         .requestMatchers("/api/**").permitAll()
+                        .requestMatchers("/tuyendung/**").hasAnyAuthority("ADMIN", "BUSINESS")
                         .anyRequest().authenticated()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
-                        .deleteCookies("JSESSIONID")
+                        .logoutSuccessUrl("/login?logout")
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
+                        .deleteCookies("JSESSIONID")
                         .permitAll()
                 )
                 .formLogin(formLogin -> formLogin
-                        .loginPage("/login")
-                        .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/")
-                        .failureUrl("/login?error")
+                        .loginPage("/login") // Trang đăng nhập.
+                        .loginProcessingUrl("/login") // URL xử lý đăng nhập.
+                        .defaultSuccessUrl("/", true) // Chuyển hướng đến trang chính sau khi đăng nhập thành công
+                        .failureUrl("/login?error=true") // Trang đăng nhập thất bại.
                         .permitAll()
                 )
-
                 .rememberMe(rememberMe -> rememberMe
-                        .key("hutech")
-                        .rememberMeCookieName("hutech")
-                        .tokenValiditySeconds(24 * 60 * 60)
+                        .key("OnlyA")
+                        .rememberMeCookieName("OnlyA")
+                        .tokenValiditySeconds(24 * 60 * 60) // Thời gian nhớ đăng nhập.
                         .userDetailsService(userDetailsService())
                 )
                 .exceptionHandling(exceptionHandling -> exceptionHandling
-                        .accessDeniedPage("/403")
+                        .accessDeniedPage("/403") // Trang báo lỗi khi truy cập không được phép.
                 )
                 .sessionManagement(sessionManagement -> sessionManagement
-                        .maximumSessions(1)
-                        .expiredUrl("/login")
+
+                        .maximumSessions(1) // Giới hạn số phiên đăng nhập.
+                        .expiredUrl("/login") // Trang khi phiên hết hạn.
                 )
                 .httpBasic(httpBasic -> httpBasic
-                        .realmName("hutech")
+                        .realmName("OnlyA") // Tên miền cho xác thực cơ bản.
                 )
-
-                .build();
+                .build(); // Xây dựng và trả về chuỗi lọc bảo mật.
     }
 
 }

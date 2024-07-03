@@ -9,8 +9,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+//them service 1/7/2024 (PostManagement)
 
 @Service
 @RequiredArgsConstructor
@@ -24,15 +26,19 @@ public class jobPostingService {
     }
 
     public List<JobPosting> getAllPostsByRecruiterID(String recruiterID) {
-        Recruiter recruiter = RecruiterRepository.findById(recruiterID)
-                .orElseThrow(() -> new RuntimeException("Recruiter not found"));
+        Optional<Recruiter> recruiter = RecruiterRepository.findById(recruiterID);
+        //                .orElseThrow(() -> new RuntimeException("Recruiter not found"));
+        if (recruiter.isEmpty())
+            return new ArrayList<>();
+
         return jobPostingRepository.findByRecruiter(recruiter);
+
     }
 
-    public int SLUngTuyen(String recruiterID){
+    public int SLUngTuyen(String recruiterID) {
         List<JobPosting> Posts = getAllPostsByRecruiterID(recruiterID);
         int SL = 0;
-        for(JobPosting p : Posts){
+        for (JobPosting p : Posts) {
             SL += p.getTotalApplications();
         }
         return SL;
@@ -41,6 +47,7 @@ public class jobPostingService {
     public Optional<JobPosting> getJobById(String id) {
         return jobPostingRepository.findById(id);
     }
+
     // Add a new product to the database
     public JobPosting addJobPosting(JobPosting jobPosting) {
         return jobPostingRepository.save(jobPosting);
@@ -53,11 +60,16 @@ public class jobPostingService {
 
         return jobPostingRepository.save(existingJobPost);
     }
+
     // Delete a product by its id
     public void deleteJobPostingById(String id) {
         if (!jobPostingRepository.existsById(id)) {
             throw new IllegalStateException("Job posting with ID " + id + " does not exist.");
         }
         jobPostingRepository.deleteById(id);
+    }
+
+    public List<JobPosting> searchJobPostings(String keyword) {
+        return jobPostingRepository.findByJobTitleContaining(keyword);
     }
 }

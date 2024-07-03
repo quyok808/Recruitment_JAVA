@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title th:text="${title} ?: 'Kết Quả'">Kết Quả</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { height: 100vh; }
+    </style>
+    <style>
+        .banner {
+            background: linear-gradient(90deg, #3950eb, #55dae3);
+            text-align: center;
+            justify-content: center;
+            height: 400px;
+            width: 1100px;
+            border-radius: 10px;
+            display: block;
+            margin-left: 210px;
+            position: relative;
+            margin-top:100px;
+
+        }
+        .company-image {
+            width: 1100px;
+            height: 250px;
+            position: absolute;
+            left: 0;
+            z-index:1000;
+            border-radius:10px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .company-logo-container {
+            position: absolute;
+            top: 170px;
+            left: 50px;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            overflow: hidden;
+            z-index:1000;
+            border: 3px solid #ffffff; /* White border around the circular image */
+<!--            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional shadow for better visualization */-->
+        }
+        .company-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensure the image covers the container */
+        }
+         .company-name {
+            color: white;
+            font-size: 26px;
+            font-weight: 600;
+            z-index: 1000;
+            position: absolute;
+            top: 280px; /* Đưa phần tử lên giữa theo chiều dọc */
+            left: 500px; /* Đưa phần tử lên giữa theo chiều ngang */
+            transform: translate(-50%, -50%); /* Dịch chuyển phần tử điều chỉnh vị trí chính xác */
+        }
+
+        .frame-below-banner-right {
+            background-color: #ffffff;
+            border-radius: 10px;
+            width: 350px;
+            height:400x;
+            margin-left:960px;
+            margin-top: -235px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .frame-below-banner {
+            background-color: #ffffff;
+            border-radius: 10px;
+            width: 1100px;
+            margin-left: 210px;
+            margin-top: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .frame-below-banner-bottom{
+            background-color: #ffffff;
+            border-radius: 10px;
+            width: 1100px;
+            margin-left: 210px;
+            height:200px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .frame-header {
+            background: linear-gradient(90deg, #3950eb, #55dae3);
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .frame-content {
+            padding: 20px;
+            max-height: 140px; /* Initial height */
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .frame-content-right {
+            padding: 20px;
+            max-height: 140px; /* Initial height */
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .frame-content.expanded {
+            max-height: none; /* Expand to show full content */
+        }
+        .toggle-button {
+            display: block;
+            margin: 0 auto;
+            padding: 10px 20px;
+            background-color: transparent; /* No background */
+            color: #3950eb; /* Text color */
+            border: none; /* No border */
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left:0px;
+        }
+        .toggle-button:focus {
+            outline: none; /* Remove focus outline */
+        }
+         .follow-button {
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            color: #0c43e8;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 1000;
+        }
+        .follow-button:hover {
+            border: 1px solid #0c43e8;
+        }
+
+    </style>
+</head>
+<body>
+<section layout:fragment="content" >
+    <div class="banner">
+        <div th:if="${company.imagePath2 != null}">
+            <img th:src="@{/uploads/{imagePath2}(imagePath2=${company.imagePath2})}" alt="Company Image" class="company-image">
+        </div>
+        <div th:if="${company.imagePath1 != null}" class="company-logo-container">
+            <img th:src="@{/uploads/{imagePath1}(imagePath1=${company.imagePath1})}" alt="Company Logo" class="company-logo">
+        </div>
+        <h1 class="company-name" th:text="${company.name}">Company Name</h1>
+        <button class="follow-button">Theo dõi</button>
+    </div>
+    <div class="frame-below-banner">
+        <div class="frame-header">
+            GIỚI THIỆU CÔNG TY
+        </div>
+        <div class="frame-content">
+            <p class="card-text" th:text="${company.description}"></p>
+        </div>
+        <button class="toggle-button" onclick="toggleContent()">Xem thêm &#x25BC;</button>
+    </div>
+<!--    <div class="frame-below-banner-right">-->
+<!--        <div class="frame-header">-->
+<!--            THÔNG TIN LIÊN HỆ-->
+<!--        </div>-->
+<!--        <div class="frame-content-right">-->
+<!--            &lt;!&ndash; Nội dung cho khung bên phải &ndash;&gt;-->
+
+<!--        </div>-->
+<!--    </div>-->
+
+    <div class="frame-below-banner-bottom">
+        <div class="frame-header">
+            THÔNG TIN KHÁC
+        </div>
+        <div class="frame-content">
+            <p class="card-text">Nội dung khác của công ty.</p>
+            <p class="card-text">Dia chi: <span th:text="${company.diachi}"></span></p>
+        </div>
+
+    </div>
+</section>
+    </div>
+
+</section>
+<script>
+    function toggleContent() {
+       var content = document.querySelector('.frame-content');
+       var button = document.querySelector('.toggle-button');
+       content.classList.toggle('expanded');
+       if (content.classList.contains('expanded')) {
+           button.innerHTML = 'Thu gọn &#x25B2;'; // Mũi tên lên
+       } else {
+           button.innerHTML = 'Xem thêm &#x25BC;'; // Mũi tên xuống
+       }
+   }
+</script>
+</body>
+</html>

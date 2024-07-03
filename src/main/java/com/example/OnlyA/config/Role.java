@@ -8,4 +8,8 @@ public enum Role {
     PERSONAL("2"), // Vai trò người dùng bình thường, có quyền hạn giới hạn.
     BUSINESS("3");
     public final String value; // Biến này lưu giá trị số tương ứng với mỗi vai trò.
+
+    public String getValue() {
+        return value;
+    }
 }
