@@ -46,8 +46,7 @@ public class User implements UserDetails {
     private String phone;
     @NotEmpty(message = "Account type is required")
     private String accountType;
-    private String Name;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -65,22 +64,18 @@ public class User implements UserDetails {
     public boolean isAccountNonExpired() {
         return true;
     }
-
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
-
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
     @Override
     public boolean isEnabled() {
         return true;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -89,7 +84,6 @@ public class User implements UserDetails {
         User user = (User) o;
         return getUserID() != null && Objects.equals(getUserID(), user.getUserID());
     }
-
     @Override
     public int hashCode() {
         return getClass().hashCode();

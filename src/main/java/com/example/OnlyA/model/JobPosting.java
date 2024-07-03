@@ -27,16 +27,9 @@ public class JobPosting {
     private String jobDescription;
     private String location;
     private LocalDate datePosted;
-    private String Kinhnghiem;
-    @ManyToOne
-    @JoinColumn(name = "CareersID")
-    private Careers careers;
-    private String ChucVu;
-    private String HinhThucLamViec;
-    private long MucLuong;
-    private String Author;
     private int totalApplications = 0;
     private int totalHired = 0;
+    private int Trangthai;
     // Getters and setters
 }
 

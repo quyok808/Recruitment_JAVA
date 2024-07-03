@@ -8,19 +8,18 @@ import org.hibernate.annotations.GenericGenerator;
 @Getter
 @Setter
 @Entity
-public class Recruiter {
+public class Candidate {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String recruiterID;
+    private String candidateID;
 
     @ManyToOne
     @JoinColumn(name = "userID")
     private User user;
+    private String Name;
+    private String resume;
 
-    private String companyName;
-    private String companyDescription;
-    private String Image_Logo;
-    private String Email;
     // Getters and setters
 }
+
